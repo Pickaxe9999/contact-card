@@ -10,7 +10,8 @@
     "server": "cd server nodemon server.js --ignore client",
     "build": "cd client && npm run build",
     "client": "cd client && npm start",
-    "install": "concurrently \"cd client && npm install\" \"cd server && npm install\" "
+    "install": "concurrently \"cd client && npm install\" \"cd server && npm install\" ",
+    "heroku-prebuild": "npm install --dev"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
   "homepage": "https://github.com/Pickaxe9999/contact-card#readme",
   "dependencies": {
     "concurrently": "^7.3.0"
+  },
+  "engines": {
+    "node": "17.x"
   }
 }
