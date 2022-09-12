@@ -1,8 +1,7 @@
-import "./form";
 import '../css/index.css';
 import {Tooltip, Toast, Popover} from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { initdb,getDb,postDb,delelteDb,editDb } from "./database";
+import { initdb,postDb,deleteDb,editDb } from "./database";
 import {fetchCards} from "./card";
 import { toggleForm, clearForm } from "./form";
 
@@ -29,29 +28,37 @@ toggleForm()
 })
 
 form.addEventListener('submit', event => {
-// Handle data
-event.preventDefault();
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-let email = document.getElementById("email").value;
-let profile = document.querySelector('input[type="radio"]:checked').value;
+    // Handle data
+    event.preventDefault();
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
+    let profile = document.querySelector('input[type="radio"]:checked').value;
 
-// Post form data to IndexedDB OR Edit an existing card in IndexedDB
-if (submitBtnToUpdate == false) {
-postDb(name, email, phone, profile);
-} else {
+    // Post form data to IndexedDB OR Edit an existing card in IndexedDB
+    if (submitBtnToUpdate == false) {
+        postDb(name, email, phone, profile);
+    } else {
 
-fetchCards();
-    // Toggles the submit button back to POST functionality
-submitBtnToUpdate = false;
-}
+        // Obtains values passed into the form element
+    let name = document.getElementById("name").value;
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
+    let profile = document.querySelector('input[type="radio"]:checked').value;
 
-// Clear form
-clearForm();
-// Toggle form
-toggleForm();
-// Reload the DOM
-fetchCards();
+    editDb(profileId, name, email, phone, profile)
+
+        fetchCards();
+            // Toggles the submit button back to POST functionality
+        submitBtnToUpdate = false;
+    }
+
+    // Clear form
+    clearForm();
+    // Toggle form
+    toggleForm();
+    // Reload the DOM
+    fetchCards();
 });
 
 window.deleteCard = (e) => {

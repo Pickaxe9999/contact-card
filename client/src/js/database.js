@@ -47,7 +47,7 @@ export const postDb = async (name, email, phone, profile) => {
     return result;
 }
 
-export const delelteDb = async (id) => {
+export const deleteDb = async (id) => {
     console.log('DELETE from the database', id);
 
     const contactDb = await openDB('contact_db', 1);
@@ -75,5 +75,5 @@ export const editDb = async (id, name, email, phone, profile) => {
     const request = store.put({id: id, name: name, email: email, phone: phone, profile: profile});
 
     const result = await request;
-    console.log(('🚀 - data saved to the database', result);
+    console.log('🚀 - data saved to the database', result)
 }
