@@ -86,3 +86,10 @@ window.editCard = (e) => {
 
     submitBtnToUpdate = true;
 }
+
+//register service worker
+if('serviceWorker' in Navigator){
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+    })
+}
