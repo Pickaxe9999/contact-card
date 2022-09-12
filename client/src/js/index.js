@@ -2,7 +2,7 @@ import "./form";
 import '../css/index.css';
 import {Tooltip, Toast, Popover} from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { initdb,getDb,postDb } from "./database";
+import { initdb,getDb,postDb,delelteDb,editDb } from "./database";
 import {fetchCards} from "./card";
 import { toggleForm, clearForm } from "./form";
 
@@ -53,3 +53,28 @@ toggleForm();
 // Reload the DOM
 fetchCards();
 });
+
+window.deleteCard = (e) => {
+    // Grabs the id from the button element attached to the contact card.
+    let id = parseInt(e.id);
+    // Delete the card
+    deleteDb(id);
+
+    fetchCards();
+};
+
+window.editCard = (e) => {
+    profileId = parseInt(e.dataset.id);
+
+    let editName = e.dataset.name;
+    let editEmail = e.dataset.email;
+    let editPhone = e.dataset.phone;
+
+    document.getElementById('name').value = editName;
+    document.getElementById('email').value = editEmail;
+    document.getElementById('phone').value = editPhone;
+
+    form.style.display = "block";
+
+    submitBtnToUpdate = true;
+}
