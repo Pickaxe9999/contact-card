@@ -9,6 +9,8 @@ import Logo from '../images/logo.png';
 import Bear from '../images/bear.png';
 import Dog from '../images/dog.png';
 
+const installBtn = document.getElementById('installBtn');
+
 window.addEventListener('load', function() {
     initdb();
     fetchCards();
@@ -92,3 +94,17 @@ if('serviceWorker' in Navigator){
         navigator.serviceWorker.register('./service-worker.js')
     })
 }
+
+window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    installBtn.style.visibility = 'visible';
+});
+
+installBtn.addEventListener('click', () => {
+    installBtn.setAttribute('disabled', true);
+    installBtn.textContent = 'Installed!';
+});
+
+window.addEventListener('appinstalled', (event) => {
+    console.log('👍', 'appinstalled', event);
+});
